@@ -24,17 +24,28 @@ const Statistics = ({good, bad, neutral}) => {
   let positive = 0;
   // Utilizamos el operador ternario para cuando no haya valores para good, bad o neutral para poner valor 0 a positive
   good !== 0 && bad !== 0 && neutral !== 0 ? positive = Math.round((good / total) * 10000) / 100 : positive = 0;
-  return(
-    <>
-      <h2>Statistics</h2>
-      <Display text='good' value={good} />
-      <Display text='neutral' value={neutral} />
-      <Display text='bad' value={bad} />
-      <Display text='Total' value={total} />
-      <Display text='Average' value={average} />
-      <Display text='Positive' value={positive} percentage={true} />
-    </>
-  )
+
+  // Renderizamos solo si hay al menos un comentario si no comentario por defecto
+  if (good === 0 && bad === 0 && neutral === 0 ) {
+    return (
+      <>
+        <h2>Statistics</h2>
+        <div>No feedback given</div>
+      </>
+    )
+  } else {
+    return(
+      <>
+        <h2>Statistics</h2>
+        <Display text='good' value={good} />
+        <Display text='neutral' value={neutral} />
+        <Display text='bad' value={bad} />
+        <Display text='Total' value={total} />
+        <Display text='Average' value={average} />
+        <Display text='Positive' value={positive} percentage={true} />
+      </>
+    )
+  }
 }
 
 
