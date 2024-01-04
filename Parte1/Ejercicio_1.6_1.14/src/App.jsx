@@ -3,11 +3,17 @@ import { useState } from "react";
 const StatisticLine = ({text ,value, percentage = false}) => {
   if (percentage == true) {
     return(
-      <div>{text}: {value}%</div>
+      <tr>
+        <td>{text}</td>
+        <td>{value}%</td>
+      </tr>
       )
   } else {
     return(
-      <div>{text}: {value}</div>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
       )
   }
 }
@@ -20,7 +26,7 @@ const Button = ({ handleClick, text }) => (
 const Statistics = ({good, bad, neutral}) => {
   const total = good + neutral + bad;
   // Funcion para rendondear a centesimas
-  const average = Math.round(((good * 1) + (neutral * 0) + (bad * -1) / 3) * 100) / 1000;
+  const average = Math.round(((good * 1) + (neutral * 0) + (bad * -1) / 3) * 10) / 100;
   let positive = 0;
   // Utilizamos el operador ternario para cuando no haya valores para good, bad o neutral para poner valor 0 a positive
   good !== 0 && bad !== 0 && neutral !== 0 ? positive = Math.round((good / total) * 10000) / 100 : positive = 0;
