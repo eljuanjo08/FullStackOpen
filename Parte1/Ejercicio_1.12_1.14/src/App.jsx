@@ -2,6 +2,22 @@ import { useState } from "react";
 
 const Button = ({handClick, text}) => <button onClick={handClick}>{text}</button>;
 
+const PopularAnecdote = ({ anecdotes, vote }) => {
+  // Utilizamos math.max para encontrar el valor maximo de vote e indexof para obtener su indice
+  const mostVotedIndex = vote.indexOf(Math.max(...vote));
+  const mostVoted = Math.max(...vote)
+  // console.log(mostVoted);
+  if (mostVoted === 0) {
+    return (
+      <div>There is no popular anecdote</div>
+    )
+  } else {
+    return(
+      <div>{anecdotes[mostVotedIndex]} votes: {vote[mostVotedIndex]}</div>
+    )
+  }
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -15,13 +31,13 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
-  const [vote, setVote] = useState([0,0,0,0,0,0,0,0]);
+  const [vote, setVote] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
 
-  const numeroAleatorio = () =>{
+  const numeroAleatorio = () => {
     let numAnecdotes = anecdotes.length;
     let numeroAleatorio = Math.floor(Math.random() * numAnecdotes);
     return numeroAleatorio;
-  }
+  };
 
   const nextAnecdote = () => {
     setSelected(numeroAleatorio());
@@ -31,16 +47,18 @@ const App = () => {
     const copy = [...vote];
     copy[selected] += 1;
     setVote(copy);
-  }
- 
+  };
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>
         {anecdotes[selected]} votes: {vote[selected]}
       </div>
-      <Button handClick={nextAnecdote} text='next anecdote' />
-      <Button handClick={voted} text='vote' />
+      <Button handClick={nextAnecdote} text="next anecdote" />
+      <Button handClick={voted} text="vote" />
+      <h2>Anecdote with most votes</h2>
+      <PopularAnecdote anecdotes={anecdotes} vote={vote} selected={selected} />
     </div>
   );
 };
