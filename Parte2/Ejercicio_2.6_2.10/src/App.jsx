@@ -14,8 +14,13 @@ const App = () => {
       name: newName
     }
 
-    setPersons(persons.concat(newPerson));
-    setNewName("");
+    const findPerson = persons.find(person => person.name === newName);
+    if (findPerson === undefined) {
+      setPersons(persons.concat(newPerson));
+      setNewName("");
+    } else {
+      alert(`${newName} is alredy added to phoneook`)
+    }
   }
 
   return (
