@@ -8,14 +8,12 @@ const App = () => {
   const [persons, setPersons] = useState([]);
 
   const hook = () => {
-    axios
-      .get(" http://localhost:3001/persons")
-      .then(response => {
-        setPersons(response.data)
-      })
-  }
+    axios.get(" http://localhost:3001/persons").then((response) => {
+      setPersons(response.data);
+    });
+  };
 
-  useEffect(hook, [])
+  useEffect(hook, []);
 
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
