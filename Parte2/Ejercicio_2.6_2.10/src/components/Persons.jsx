@@ -1,6 +1,6 @@
 import React from "react";
 
-const Person = ({ personsToShow }) => {
+const Person = () => {
   return (
     <div>
       {persons.map((person) => (

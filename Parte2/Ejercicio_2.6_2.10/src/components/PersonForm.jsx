@@ -1,10 +1,11 @@
 import React from "react";
+import db from "../services/db";
 
 const PersonForm = ({
   persons,
+  setPersons,
   setNewName,
   setNewNumber,
-  setPersons,
   newName,
   newNumber,
 }) => {
@@ -25,7 +26,10 @@ const PersonForm = ({
 
     const findPerson = persons.find((person) => person.name === newName);
     if (findPerson === undefined) {
-      setPersons(persons.concat(newPerson));
+      db.create(newPerson)
+        .then(res => {
+          setPersons(persons.concat(res))
+        })
       setNewName("");
       setNewNumber("");
     } else {
@@ -35,10 +39,10 @@ const PersonForm = ({
   return (
     <form onSubmit={addPerson}>
       <div>
-        name: <input onChange={handleChangePersons} value={newName} />
+        name: <input onChange={handleChangePersons} value={newName} name="addPerson"/>
       </div>
       <div>
-        number: <input onChange={handleChangeNumbers} value={newNumber} />
+        number: <input onChange={handleChangeNumbers} value={newNumber} name="addNumber"/>
       </div>
       <div>
         <button type="submit">add</button>

@@ -14,7 +14,7 @@ const Filter = ({ persons, filterPerson, setFilterPerson}) => {
 
   return (
     <div>
-      <input onChange={handleChangeFilterPersons} value={filterPerson} />
+      <input onChange={handleChangeFilterPersons} value={filterPerson} name="filter"/>
       <Person personsToShow={personsToShow} />
     </div>
   );
