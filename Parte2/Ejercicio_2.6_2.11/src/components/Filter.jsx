@@ -1,21 +1,23 @@
-import React from "react";
-import Person from "./PersonFilter";
+import React, { useEffect } from "react";
 
-const Filter = ({ persons, filterPerson, setFilterPerson}) => {
-  const filter = persons.filter(
+const Filter = ({ persons, filterPerson, setFilterPerson, setFilter, filter}) => {
+  const filt = persons.filter(
     (person) =>
       person.name.toLowerCase().indexOf(filterPerson.toLowerCase()) != -1
   );
-  const personsToShow = filterPerson === "" ? persons : filter;
+  const personsToShow = filterPerson === "" ? persons : filt;
   
   const handleChangeFilterPersons = (event) => {
     setFilterPerson(event.target.value);
   };
+  
+  useEffect(()=> {
+    setFilter(personsToShow)
+  }, [[], filterPerson])
 
   return (
     <div>
       <input onChange={handleChangeFilterPersons} value={filterPerson} name="filter"/>
-      <Person personsToShow={personsToShow} />
     </div>
   );
 };

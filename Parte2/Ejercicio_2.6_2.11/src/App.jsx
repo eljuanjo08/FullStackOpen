@@ -7,6 +7,7 @@ import db from "./services/db";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
+  const [filter, setFilter] = useState([]);
 
   useEffect(() => {
     db
@@ -25,6 +26,8 @@ const App = () => {
         persons={persons}
         filterPerson={filterPerson}
         setFilterPerson={setFilterPerson}
+        setFilter={setFilter}
+        filter={filter}
       />
       <h2>add a new</h2>
       <PersonForm
@@ -36,7 +39,7 @@ const App = () => {
         newNumber={newNumber}
       />
       <h2>Numbers</h2>
-      <Person personsToShow={persons} />
+      <Person personsToShow={filter} />
     </div>
   );
 };
